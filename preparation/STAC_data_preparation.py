@@ -168,10 +168,13 @@ def slice_waveform(input_file,text_file):
         cleaned_text = re.sub(r'\[lan:EN, (.*?)\]', r'<en>\1</en>', cleaned_text)
 
         # Replace <word, tag> pattern for Arabic words (including spaces) with the word directly
-        cleaned_text = re.sub(r'<(.*?),\s*.*?>', r'\1', cleaned_text)
+        cleaned_text = re.sub(r'<(.*?)[,،]\s*.*?>', r'\1', cleaned_text)
 
         # # Remove Punctuation marks
-        cleaned_text = re.sub(r'[.,?!;:"()\[\]{}\-…&*%$#@+\=÷]', '', cleaned_text)
+        cleaned_text = re.sub(r'[.,?؟!;:"()\[\]{}\-…&*%$#@+\=÷]', '', cleaned_text)
+        
+        #Lower case characters
+        cleaned_text = re.sub(r'[A-Z]', lambda match: match.group().lower(), cleaned_text)
 
         # # Replace multiple spaces with a single space
         cleaned_text = re.sub(r'\s+', ' ', cleaned_text)

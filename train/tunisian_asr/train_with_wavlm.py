@@ -282,6 +282,9 @@ def dataio_prepare(hparams, tokenizer):
         resampled = torchaudio.transforms.Resample(
             info.sample_rate, hparams["sample_rate"],
         )(sig)
+        if info.num_channels > 1:
+              resampled = resampled[:, 0]
+        
         return resampled
 
     sb.dataio.dataset.add_dynamic_item(datasets, audio_pipeline)

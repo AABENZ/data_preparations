@@ -171,7 +171,9 @@ def slice_waveform(input_file,text_file):
         cleaned_text = re.sub(r'<(.*?)[,،]\s*.*?>', r'\1', cleaned_text)
 
         # # Remove Punctuation marks
-        cleaned_text = re.sub(r'[.,?؟!;:"()\[\]{}\-…&*%$#@+\=÷]', '', cleaned_text)
+        cleaned_text = re.sub(r'[.,،?؟!;:"()\[\]{}\-…&*%$#@+\=÷]', '', cleaned_text)
+        
+        cleaned_text = re.sub(r'[’]', "'", cleaned_text)
         
         #Lower case characters
         cleaned_text = re.sub(r'[A-Z]', lambda match: match.group().lower(), cleaned_text)
